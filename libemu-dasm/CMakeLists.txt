@@ -9,7 +9,6 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/arch:AVX2)
 endif ()
 
-include_directories(../include)
-
 add_library(libemu-dasm SHARED mos6502/mos6502_disassembler.cpp)
 set_target_properties(libemu-dasm PROPERTIES PREFIX "")
+target_include_directories(libemu-dasm PUBLIC ../include)
