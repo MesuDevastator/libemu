@@ -10,7 +10,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif ()
 
 add_executable(libemu-console main.cpp)
-add_dependencies(libemu-console libemu-dasm)
+add_dependencies(libemu-console libemu-dasm libemu-dasm-static)
 target_include_directories(libemu-console PUBLIC ../include ../libemu-dasm)
 target_link_directories(libemu-console PUBLIC ${libemu-dasm_BINARY_DIR})
 target_link_libraries(libemu-console PUBLIC libemu-dasm)
