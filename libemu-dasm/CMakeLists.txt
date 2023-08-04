@@ -3,9 +3,13 @@ project(libemu-dasm)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_compile_options(-march=skylake)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    add_compile_options(-march=skylake)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    add_compile_options(/arch:AVX2)
+endif ()
 
 include_directories(../include)
 
-add_library(libemu-dasm SHARED ../include/operation.h mos6502/mos6502_disassembler.h mos6502/mos6502_disassembler.cpp disassembler.h ../include/type_define.h mos6502/mos6502_operation.h)
+add_library(libemu-dasm SHARED mos6502/mos6502_disassembler.cpp)
 set_target_properties(libemu-dasm PROPERTIES PREFIX "")
