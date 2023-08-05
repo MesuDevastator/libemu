@@ -204,7 +204,7 @@ int main()
 					unsigned long j;
 					for (j = offset; j < operations.at(i).instruction_length + offset; j++)
 						std::cout << fmt::format("{:02x} ", memory[j]);
-					offset = j + 1;
+					offset = j;
 					for (; j < longest; j++)
 						std::cout << "   ";
 					std::cout << "| ";
