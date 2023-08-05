@@ -54,7 +54,7 @@ namespace
 			// beq
 			{ 0xf0, { op::beq, 0, op::relative, 2, 2 }},
 			// brk
-			{ 0x00, { op::brk, 0, op::implied, 2, 2 }},
+			{ 0x00, { op::brk, 0, op::implied, 1, 2 }},
 			// cmp
 			{ 0xc9, { op::cmp, 0, op::immediate, 2, 2 }},
 			{ 0xc5, { op::cmp, 0, op::zero_page, 2, 3 }},
