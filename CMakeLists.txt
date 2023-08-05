@@ -3,3 +3,4 @@ project(libemu)
 
 add_subdirectory(./libemu-dasm)
 add_subdirectory(./libemu-console)
+add_subdirectory(./lib/fmt)

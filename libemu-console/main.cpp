@@ -2,12 +2,11 @@
 #include <memory>
 #include <sstream>
 #include <vector>
-#include <memory>
-#include <format>
 
 #include <disassembler.h>
 #include <mos6502/mos6502_disassembler.h>
-#include <type_define.h>
+
+#include <fmt/core.h>
 
 namespace
 {
@@ -176,7 +175,7 @@ int main()
 						"usbc",
 						"jam",
 					};
-				static std::format_string<int32_t> addressing_mode_formats[]
+				static fmt::format_string<int32_t> addressing_mode_formats[]
 					{
 						"",
 						"a",
@@ -205,15 +204,15 @@ int main()
 				}
 				for (unsigned long i{}; i < operations.size(); i++)
 				{
-					if (operations.at(i).addressing_mode == libemu::dasm::mos6502_operation::relative)
-						std::cout << instruction_names[operations.at(i).instruction] << " " << std::vformat(
+					if (int32_t operator_{ static_cast<int32_t>(static_cast<int8_t>(operations.at(i).operator_ + 2)) };
+						operations.at(i).addressing_mode == libemu::dasm::mos6502_operation::relative)
+						std::cout << instruction_names[operations.at(i).instruction] << " " << fmt::vformat(
 							addressing_mode_formats[operations.at(i).addressing_mode].get(),
-							std::make_format_args(static_cast<int32_t>(static_cast<int8_t>(operations.at(i).operator_
-								+ 2)))) << std::endl;
+							fmt::make_format_args(operator_)) << std::endl;
 					else
-						std::cout << instruction_names[operations.at(i).instruction] << " " << std::vformat(
+						std::cout << instruction_names[operations.at(i).instruction] << " " << fmt::vformat(
 							addressing_mode_formats[operations.at(i).addressing_mode].get(),
-							std::make_format_args(operations.at(i).operator_)) << std::endl;
+							fmt::make_format_args(operations.at(i).operator_)) << std::endl;
 				}
 				break;
 			}
