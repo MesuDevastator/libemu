@@ -41,9 +41,9 @@ int main()
 		tokens = split(buffer, ' ');
 		if (tokens.empty())
 			continue;
-		if (tokens.at(0) == "q" || tokens.at(0) == "quit")
+		else if (tokens.at(0) == "q" || tokens.at(0) == "quit")
 			break;
-		if (tokens.at(0) == "h" || tokens.at(0) == "help")
+		else if (tokens.at(0) == "h" || tokens.at(0) == "help")
 		{
 			std::cout << "< List of commands (case sensitive)" << std::endl
 					  << "|->quit (q): Quit the debug console" << std::endl
@@ -54,9 +54,8 @@ int main()
 					  << std::endl
 					  << "< List of architectures" << std::endl
 					  << "mos6502: MOS Technology 6502" << std::endl;
-			continue;
 		}
-		if (tokens.at(0) == "a" || tokens.at(0) == "arch")
+		else if (tokens.at(0) == "a" || tokens.at(0) == "arch")
 		{
 			if (tokens.size() < 2)
 			{
@@ -78,13 +77,8 @@ int main()
 			}
 			std::cout << "< Set architecture to \"" << tokens.at(1) << "\"" << std::endl;
 		}
-		if (tokens.at(0) == "d" || tokens.at(0) == "dasm")
+		else if (tokens.at(0) == "d" || tokens.at(0) == "dasm")
 		{
-			if (architecture == unset)
-			{
-				std::cout << "< Architecture not set" << std::endl;
-				continue;
-			}
 			if (tokens.size() < 2)
 			{
 				std::cout << "< Too few arguments" << std::endl;
@@ -202,9 +196,20 @@ int main()
 					operations.push_back(disassembler.disassemble_internal(memory.get(), j, i));
 					j = i + 1;
 				}
+				unsigned long longest{};
 				for (unsigned long i{}; i < operations.size(); i++)
+					longest = std::max(operations.at(i).instruction_length, longest);
+				for (unsigned long i{}, offset{}; i < operations.size(); i++)
 				{
-					if (int32_t operator_{ static_cast<int32_t>(static_cast<int8_t>(operations.at(i).operator_ + 2)) };
+					unsigned long j;
+					for (j = offset; j < operations.at(i).instruction_length + offset; j++)
+						std::cout << fmt::format("{:02x} ", memory[j]);
+					offset = j + 1;
+					for (; j < longest; j++)
+						std::cout << "   ";
+					std::cout << "| ";
+					if (int32_t
+							operator_{ static_cast<int32_t>(static_cast<int8_t>(operations.at(i).operator_ + 2)) };
 						operations.at(i).addressing_mode == libemu::dasm::mos6502_operation::relative)
 						std::cout << instruction_names[operations.at(i).instruction] << " " << fmt::vformat(
 							addressing_mode_formats[operations.at(i).addressing_mode].get(),
@@ -216,7 +221,15 @@ int main()
 				}
 				break;
 			}
+			case unset:
+				std::cout << "< Architecture not set" << std::endl;
+				break;
 			}
+		}
+		else
+		{
+			std::cout << "< Unknown command" << std::endl;
+			continue;
 		}
 	}
 	return 0;
