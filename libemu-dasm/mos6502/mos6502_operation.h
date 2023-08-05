@@ -10,7 +10,7 @@ namespace libemu::dasm
 		enum instructions
 		{
 			adc,    // Add with carry
-			and_,    // Bitwise and with accumulator
+			and_,   // Bitwise and with accumulator
 			asl,    // Arithmetic shift left
 			bit,    // Test bits
 			bpl,    // Branch on plus
@@ -93,19 +93,19 @@ namespace libemu::dasm
 
 		enum addressing_modes
 		{
-			implied,				// clc
-			accumulator,			// lsr a
-			immediate,				// lda #10
-			zero_page,				// lda $00
-			zero_page_x,			// sty $10, x
-			zero_page_y,			// ldx $10, y
-			relative,				// bne *+4
-			absolute,				// jmp $1234
-			absolute_x,				// sta $3000, x
-			absolute_y,				// and $4000, y
-			indirect,				// jmp ($fffc)
-			indirect_x,				// lda ($40, x)
-			indirect_y,				// lda ($40), y
+			implied,		// clc
+			accumulator,	// lsr a
+			immediate,		// lda #10
+			zero_page,		// lda $00
+			zero_page_x,	// sty $10, x
+			zero_page_y,	// ldx $10, y
+			relative,		// bne *+4
+			absolute,		// jmp $1234
+			absolute_x,		// sta $3000, x
+			absolute_y,		// and $4000, y
+			indirect,		// jmp ($fffc)
+			indirect_x,		// lda ($40, x)
+			indirect_y, 	// lda ($40), y
 		};
 
 		instructions instruction;
