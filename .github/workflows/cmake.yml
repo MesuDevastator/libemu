@@ -44,21 +44,21 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest -C ${{env.BUILD_TYPE}}
       
-    - if: if: ${{runner.os}} == 'Windows'
+    - if: ${{runner.os}} == 'Windows'
       name: Upload - Windows
       uses: actions/upload-artifact@v3
       with:
         name: libemu-windows
         path: |
           build/
-    - if: if: ${{runner.os}} == 'Linux'
+    - if: ${{runner.os}} == 'Linux'
       name: Upload - Linux
       uses: actions/upload-artifact@v3
       with:
         name: libemu-linux
         path: |
           build/
-    - if: if: ${{runner.os}} == 'macOS'
+    - if: ${{runner.os}} == 'macOS'
       name: Upload - macOS
       uses: actions/upload-artifact@v3
       with:
