@@ -51,7 +51,6 @@ int main()
 					  << "|->arch (a): Set architecture" << std::endl
 					  << "|->dasm (d): Disassemble instructions in hex format (individually)" << std::endl
 					  << "   |-> e.g. dasm EA 69 FF" << std::endl
-					  << std::endl
 					  << "< List of architectures" << std::endl
 					  << "mos6502: MOS Technology 6502" << std::endl;
 		}
