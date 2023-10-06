@@ -354,7 +354,8 @@ namespace libemu::dasm
 	{
 		mos6502_operation operation{ operation_table.at(bytes[begin_offset]) };
 		libemu::offset i;
-		for (i = 1 + begin_offset; i < static_cast<libemu::offset>(operation.instruction_length) + begin_offset && i <= end_offset; ++i)
+		for (i = 1 + begin_offset;
+			 i < static_cast<libemu::offset>(operation.instruction_length) + begin_offset && i <= end_offset; ++i)
 			operation.operator_ += (bytes[i] << ((i - begin_offset - 1) * 8));
 		end_offset = i - 1;
 		// Note: Timing correction

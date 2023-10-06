@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <type_define.h>
 
 namespace libemu::dasm
@@ -113,5 +114,7 @@ namespace libemu::dasm
 		addressing_modes addressing_mode;
 		unsigned long instruction_length;
 		unsigned long execution_time;
+
+		[[nodiscard]] std::string to_string() const noexcept;
 	};
 }
