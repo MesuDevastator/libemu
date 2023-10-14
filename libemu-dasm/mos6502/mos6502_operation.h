@@ -1,11 +1,12 @@
 #pragma once
 
+#include <operation.h>
 #include <string>
 #include <type_define.h>
 
 namespace libemu::dasm
 {
-	struct mos6502_operation final
+	class mos6502_operation final : operation
 	{
 	public:
 		enum instructions
@@ -116,5 +117,11 @@ namespace libemu::dasm
 		unsigned long execution_time;
 
 		[[nodiscard]] std::string to_string() const noexcept;
+
+		mos6502_operation(instructions instruction,
+			unsigned long operator_,
+			addressing_modes addressing_mode,
+			unsigned long instruction_length,
+			unsigned long execution_time) noexcept;
 	};
 }

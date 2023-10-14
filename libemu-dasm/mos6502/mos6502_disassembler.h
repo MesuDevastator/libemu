@@ -6,10 +6,10 @@
 
 namespace libemu::dasm
 {
-	class mos6502_disassembler final : public disassembler
+	class mos6502_disassembler final : public disassembler<mos6502_operation>
 	{
 	public:
-		mos6502_operation disassemble_internal(const byte* bytes, offset begin_offset, offset& end_offset) noexcept;
+		mos6502_operation disassemble_internal(const byte* bytes, offset begin_offset, offset& end_offset) noexcept override;
 
 		operation disassemble(const byte* bytes, offset begin_offset, offset& end_offset) noexcept override;
 

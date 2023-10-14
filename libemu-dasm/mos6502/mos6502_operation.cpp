@@ -109,10 +109,21 @@ namespace libemu::dasm
 		if (long relative_operator{ static_cast<long>(static_cast<int8_t>(operator_ + 2)) };
 			addressing_mode == libemu::dasm::mos6502_operation::relative)
 			ss << instruction_names[instruction] << " "
-			   << fmt::vformat(addressing_mode_formats[addressing_mode].get(), fmt::make_format_args(relative_operator));
+			   << fmt::vformat(addressing_mode_formats[addressing_mode].get(),
+				   fmt::make_format_args(relative_operator));
 		else
 			ss << instruction_names[instruction] << " "
 			   << fmt::vformat(addressing_mode_formats[addressing_mode].get(), fmt::make_format_args(operator_));
 		return ss.str();
+	}
+
+	mos6502_operation::mos6502_operation(const libemu::dasm::mos6502_operation::instructions instruction,
+		const unsigned long operator_,
+		const libemu::dasm::mos6502_operation::addressing_modes addressing_mode,
+		const unsigned long instruction_length,
+		const unsigned long execution_time) noexcept
+		: instruction{ instruction }, operator_{ operator_ }, addressing_mode{ addressing_mode },
+		instruction_length{ instruction_length }, execution_time{ execution_time }
+	{
 	}
 }
